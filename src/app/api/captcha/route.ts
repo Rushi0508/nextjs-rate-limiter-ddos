@@ -6,7 +6,7 @@ const secret = process.env.NEXT_PUBLIC_CLOUDFLARE_SECRET_KEY!;
 
 const handler = async (req: NextRequest, res: NextResponse) => {
   const body = await req.json();
-  let formData = new FormData();
+  const formData = new FormData();
   formData.append("secret", secret);
   formData.append("response", body.token);
   const result = await fetch(url, {
