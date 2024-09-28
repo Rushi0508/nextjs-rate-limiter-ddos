@@ -2,9 +2,11 @@
 import React from 'react'
 import { Turnstile } from '@marsidev/react-turnstile'
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 const Captcha = () => {
     const [token, setToken] = React.useState<string | null>(null)
+    const router = useRouter();
     const handleCaptcha = async () => {
         const res = await fetch("/api/captcha", {
             method: "POST",
@@ -17,7 +19,7 @@ const Captcha = () => {
             const data = await res.json();
             if (data.status === 200) {
                 toast.success(data.msg)
-                window.location.href = "/"
+                router.push("/");
             } else {
                 toast.error(data.msg)
             }
